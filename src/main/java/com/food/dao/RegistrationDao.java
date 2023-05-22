@@ -5,6 +5,6 @@ import java.sql.SQLException;
 import com.food.model.User;
 
 public interface RegistrationDao {
-	public int insertUserDetails(User user) throws ClassNotFoundException, SQLException;
+	public void insertUserDetails(User user) throws ClassNotFoundException, SQLException;
 	public User getUserDetails(String userName,String password) throws ClassNotFoundException, SQLException;
 }

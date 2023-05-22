@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.food.dao.CustomerImpl;
 import com.food.dao.RegistrationImpl;
 import com.food.model.User;
 
@@ -26,51 +28,53 @@ public class UserRegister extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		CustomerImpl customer=new CustomerImpl();
 		RegistrationImpl reg=new RegistrationImpl();
 		String userName=request.getParameter("userName");
 		String password=request.getParameter("password");
 		String submitType=request.getParameter("submit");
 		User user=new User();
 		user=reg.getUserDetails(userName, password);
-		
-		if(submitType.equals("Login")&&user.getFirstName()!=null&&user.getLastName()!=null&&user.getEmail()!=null&&user.getUserName()!=null&&user.getPassword()!=null)
+		try{if(submitType.equals("Login")&&user.getFirstName()!=null&&user.getLastName()!=null&&user.getEmail()!=null&&user.getUserName()!=null&&user.getPassword()!=null)
 		{
 			
+			int customerId=customer.findCustomerId(userName);
+			String id=String.valueOf(customerId);
+			HttpSession session=request.getSession(true);
+			session.putValue("customerId", id);
+			session.putValue("userName", userName);
+			response.sendRedirect("menuCard.jsp");
 			request.setAttribute("message",user.getFirstName());
 			request.setAttribute("message", user.getLastName());
 			request.setAttribute("message",user.getEmail());
-			request.getRequestDispatcher("menuCard.jsp").forward(request, response);
+			//request.getRequestDispatcher("menuCard.jsp").forward(request, response);	
 		}
-	else if(submitType.equals("Register"))
-	{
-		user.setFirstName(request.getParameter("firstname"));
-		user.setLastName(request.getParameter("lastname"));
-		user.setEmail(request.getParameter("email"));
-		user.setUserName(request.getParameter("userName"));
-		user.setPassword(request.getParameter("password"));
+	   else if(submitType.equals("Register"))
+	    { 
+		 user.setFirstName(request.getParameter("firstname"));
+		 user.setLastName(request.getParameter("lastname"));
+		 user.setEmail(request.getParameter("email"));
+		 user.setUserName(request.getParameter("userName"));
+		 user.setPassword(request.getParameter("password"));
 		 reg.insertUserDetails(user);
-		 request.setAttribute("SuccessMessage", "Registration done,Please login to Continue..");
 		 request.getRequestDispatcher("index.jsp").forward(request, response);
+		 // request.setAttribute("SuccessMessage", "Registration done,Please login to Continue..");
 	}
 	else {
 		request.setAttribute("message","Data Not Found,Click On Register");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
-	}
+	}catch(Exception e)
+		{
+		e.printStackTrace();
+		}	}
 }

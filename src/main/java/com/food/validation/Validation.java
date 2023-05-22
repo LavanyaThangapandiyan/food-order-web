@@ -25,7 +25,7 @@ public class Validation {
 	}
 	public boolean passwordValidation(String password)
 	{
-		Pattern p=Pattern.compile("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$");
+		Pattern p=Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 		Matcher m=p.matcher(password);
 		boolean pw=m.matches();
 		if(pw)

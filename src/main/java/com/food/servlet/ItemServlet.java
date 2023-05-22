@@ -1,6 +1,7 @@
 package com.food.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.food.dao.ItemImpl;
 import com.food.model.FoodItem;
@@ -90,7 +92,10 @@ public class ItemServlet extends HttpServlet {
 			throws SQLException, IOException {
 		String name=request.getParameter("name");
 		String price=request.getParameter("price");
-		FoodItem newItem=new FoodItem(name,price);
+		String category=request.getParameter("category");
+		String type=request.getParameter("food_type");
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
+		FoodItem newItem=new FoodItem(quantity, name, price, category, type, quantity);
 		itemImpl.insertItem(newItem);
 		response.sendRedirect("list");
 	}
@@ -99,7 +104,10 @@ public class ItemServlet extends HttpServlet {
 		int id=Integer.parseInt(request.getParameter("id"));
 		String name=request.getParameter("name");
 		String price=request.getParameter("price");
-		FoodItem book=new FoodItem(id, name, price);
+		String category=request.getParameter("category");
+		String type=request.getParameter("food_type");
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
+		FoodItem book=new FoodItem(id, name, price, category, type, quantity);
 		itemImpl.updateItem(book);
 		response.sendRedirect("list");
 	}

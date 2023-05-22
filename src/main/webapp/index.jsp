@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="ISO-8859-1">
 <title>Food Shop</title>
 <link rel="stylesheet"
@@ -22,9 +20,6 @@
 				<a href="" class="navbar-brand">Food Shop</a>
 			</div>
 			<ul class="navbar-nav">
-				<li><a href="#" class="nav-link">Locations</a></li>
-				<li><a href="#" class="nav-link">Our chefs</a></li>
-				<li><a href="#" class="nav-link">About us</a></li>
 				<li><a href="register.jsp" class="nav-link">RegistrationPage</a></li>
 				<li><a href="AdminLogin.jsp"class="nav-link" >Admin</a></li>
 			</ul>
@@ -64,10 +59,7 @@
 				</div>
 			</div>
 		</fieldset>
-	</div>
-	
-				
-	
+	</div>	
 </body>
 <footer>
 <div class="jumbotron text-center" style="margin-bottom:0">

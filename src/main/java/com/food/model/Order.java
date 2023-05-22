@@ -3,39 +3,21 @@ package com.food.model;
 public class Order {
 int id;
 int foodId;
+int price;
 int customerId;
 int quantity;
 int amount;
+String foodName;
 
-public Order(int foodId, int quantity) {
-	super();
-	this.foodId = foodId;
-	this.quantity = quantity;
-}
-public Order() {
-	super();
-}
-public Order(int id, int foodId, int quantity) {
-	super();
-	this.id = id;
-	this.foodId = foodId;
-	this.quantity = quantity;
-}
-public Order(int id, int foodId, int quantity, int amount) {
-	super();
-	this.id = id;
-	this.foodId = foodId;
-	this.quantity = quantity;
-	this.amount = amount;
-}
 
-public Order(int id, int foodId, int customerId, int quantity, int amount) {
+
+
+
+public Order(int foodId, int price, String foodName) {
 	super();
-	this.id = id;
 	this.foodId = foodId;
-	this.customerId = customerId;
-	this.quantity = quantity;
-	this.amount = amount;
+	this.price = price;
+	this.foodName = foodName;
 }
 public int getId() {
 	return id;
@@ -48,6 +30,12 @@ public int getFoodId() {
 }
 public void setFoodId(int foodId) {
 	this.foodId = foodId;
+}
+public int getPrice() {
+	return price;
+}
+public void setPrice(int price) {
+	this.price = price;
 }
 public int getCustomerId() {
 	return customerId;
@@ -67,6 +55,25 @@ public int getAmount() {
 public void setAmount(int amount) {
 	this.amount = amount;
 }
+public String getFoodName() {
+	return foodName;
+}
+public void setFoodName(String foodName) {
+	this.foodName = foodName;
+}
+public Order(int price, int customerId, int quantity, String foodName) {
+	super();
+	this.price = price;
+	this.customerId = customerId;
+	this.quantity = quantity;
+	this.foodName = foodName;
+}
+public Order() {
+	super();
+}
+
+
+
 
 
 }

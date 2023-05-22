@@ -3,7 +3,6 @@ package com.food.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,30 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/AdminValidation")
-public class AdminValidation extends HttpServlet {
+/**
+ * Servlet implementation class menuCard
+ */
+@WebServlet("/menuCard")
+public class menuCard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public AdminValidation() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public menuCard() {
         super();
         // TODO Auto-generated constructor stub
     }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html;charset=UtF-8");
 		PrintWriter out=response.getWriter();
-		response.setContentType("text/html");
-		String name=request.getParameter("userName");
-		String password=request.getParameter("password");
-		if(name.equals("Lavanya")&&password.equals("lavanya26"))
-		{
-			RequestDispatcher rd=request.getRequestDispatcher("item-list.jsp");
-			rd.forward(request, response);
-			
-		}else
-		{
-		    out.println("<p>Invalid User Please Register First.</p>");
-			RequestDispatcher rd1=request.getRequestDispatcher("AdminLogin.jsp");
-			rd1.forward(request, response);
-			
-		}
+		HttpSession session=request.getSession();
+		String user=(String)session.getAttribute("userName");
+		out.println("Welcome  : " +user);
+		 out.print("<br><a href=\"menuCard.jsp\"><button type=\"button\">Menu Card</button></a>");
+		 out.print("<br><a href=\"index.jsp\"><button type=\"button\">Log out</button></a>");
 	}
 
 	/**
@@ -43,12 +46,6 @@ public class AdminValidation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		response.setContentType("AdminLogin.jsp");
-		HttpSession session=request.getSession();
-		String name=request.getParameter("userName");
-		session.setAttribute("name",name);
-		response.sendRedirect("ItemServlet");
-		
 	}
 
 }

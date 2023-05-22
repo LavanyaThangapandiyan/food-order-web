@@ -29,7 +29,6 @@
 		<div class="card">
 			<div class="card-body">
 				<form action="UserRegister" method="post">
-
 				<fieldset class="form-group">
 					<label><i class="fas fa-file-signature"></i>&nbsp&nbsp&nbspFirst
 						Name:</label> <input type="text" class="form-control" name="firstname"

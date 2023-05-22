@@ -13,10 +13,10 @@ import com.food.validation.Validation;
 
 public class ItemImpl implements ItemDao {
 	Validation valid=new Validation();
-	public static final String insert="insert into food_item(name,price)values(?,?);";
-	public static final String display="select id,name,price from food_item where id=?";
+	public static final String insert="insert into food_item(name,price,Category,food_type,Quantity)values(?,?,?,?,?)";
+	public static final String display="select id,name,price,Category,food_type,Quantity from food_item where id=?";
 	public static final String show="select *from food_item";
-	public static final String update="update food_item set name=?,price=? where id=?;";
+	public static final String update="update food_item set name=?,price=?,Category=?,food_type=?,Quantity=? where id=?;";
 	public static final String delete="delete from food_item where id=?";
 	
 public ItemImpl()
@@ -28,24 +28,33 @@ public void insertItem(FoodItem item) throws SQLException
 {
 	
 	System.out.println(insert);
-	try(Connection con=ConnectionUtil.init();
-			PreparedStatement ps=con.prepareStatement(insert)){
-		boolean name=valid.nameValidation(item.getName());
-		if(name==true)
-		{
-		ps.setString(1, item.getName());
-		ps.setString(2, item.getPrice());
-		System.out.println(ps);
-		ps.executeUpdate();
-	}else
-		System.out.println("Invalid Data");
+	       Connection con=ConnectionUtil.init();
+	        String find="select name from food_item where Category=?";
+			PreparedStatement psf=con.prepareStatement(find);
+			psf.setString(1,item.getCategory());
+			ResultSet rs=psf.executeQuery();
+			while(rs.next())
+			{
+				String foodName=rs.getString(1);
+				String name = item.getName();
+				if(foodName != name)
+				{
+					PreparedStatement ps=con.prepareStatement(insert);
+					ps.setString(1, item.getName());
+					ps.setString(2, item.getPrice());
+					ps.setString(3, item.getCategory());
+					ps.setString(4, item.getFood_type());
+					ps.setInt(5, item.getQuantity());
+					System.out.println(ps);
+					int executeUpdate = ps.executeUpdate();
+					System.out.println(executeUpdate);	
+				}else
+					System.out.println("Data Not Inserted");
+			}
+				
 	}
-	catch(Exception e)
-	{
-		e.printStackTrace();
-	}
-			
-}
+		
+
 //update food item
 public boolean updateItem(FoodItem item) throws SQLException
 {
@@ -55,7 +64,10 @@ public boolean updateItem(FoodItem item) throws SQLException
 	{
 		ps.setString(1, item.getName());
 		ps.setString(2, item.getPrice());
-		ps.setInt(3, item.getId());
+		ps.setString(3, item.getCategory());
+		ps.setString(4, item.getFood_type());
+		ps.setInt(5, item.getQuantity());
+		ps.setInt(6, item.getId());
 		rowUpdated=ps.executeUpdate()>0;
 	}	
 	
@@ -74,7 +86,10 @@ public FoodItem selectItem(int id)
 			{
 				String name=rs.getString("name");
 				String price=rs.getString("price");
-				item=new FoodItem(id,name,price);
+				String category=rs.getString("category");
+				String type=rs.getString("food_type");
+				int quantity=rs.getInt("Quantity");
+				item=new FoodItem(id, name, price, category, type, quantity);
 			}
 	}catch(SQLException ex)
 	{
@@ -95,7 +110,11 @@ public List<FoodItem> selectAllItems()
 			int id=rs.getInt("id");
 			String name=rs.getString("name");
 			String price=rs.getString("price");
-			item.add(new FoodItem(id,name,price));
+			String category=rs.getString("Category");
+			String type=rs.getString("food_type");
+			int quantity=rs.getInt("Quantity");
+			item.add(new FoodItem(id, name, price, category, type, quantity));
+			
 		}
 	}catch(SQLException e)
 	{

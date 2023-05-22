@@ -11,7 +11,6 @@
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color:  tomato">
-		</div>
             <ul class="navbar-nav">
 					<li><a href="<%=request.getContextPath()%>/list"
 						class="nav-link">Items</a></li>
@@ -39,6 +38,7 @@
 			</c:if>
 			</h2>
 			</capiton>
+			
 			<c:if test="${item !=null }">
 			<input type="hidden" name="id" value="<c:out value='${item.id }'/>"/>
 			</c:if>
@@ -47,6 +47,15 @@
 			</fieldset>
 			<fieldset class="form-group">
 			<label>Item Price:</label><input type="text" value="<c:out value='${item.price}'/>" class="form-control" name="price" >
+			</fieldset>
+			<fieldset class="form-group">
+			<label>Item Category:</label><input type="text" value="<c:out value='${item.category}'/>" class="form-control" name="category" >
+			</fieldset>
+			<fieldset class="form-group">
+			<label>Item Food Type:</label><input type="text" value="<c:out value='${item.food_type}'/>" class="form-control" name="food_type" >
+			</fieldset>
+			<fieldset class="form-group">
+			<label>Quantity:</label><input type="text" value="<c:out value='${item.quantity}'/>" class="form-control" name="quantity" >
 			</fieldset>
             <button type="submit" class="btn btn-success">Save</button>
             </form>
