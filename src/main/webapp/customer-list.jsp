@@ -23,13 +23,12 @@
 </head>
 <body>
 <header>
-			<div>
-			<div class="Logo">
-				<a href="index.jsp">Log out</a>
-			</div>
-		</div>
-	</header>
-	<br>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
+			<ul class="navbar-nav"> 
+				<li><a href="index.jsp" class="nav-link">Log out</a></li>
+			</ul>
+		</nav> 
+	</header><br>
 	<div class="row">
 		<div class="container">
 			<h3 class="text-center">List OF Customer</h3>

@@ -25,9 +25,13 @@
 			</div>
 			</header> <br> 
 <%
+String userName=(String)session.getValue("userName");
 String csid = (String)session.getValue("customerId");
 int customerId=Integer.parseInt(csid);
 %>
+<br>
+	<h3>Welcome  :<%=userName %></h3>
+	<div>
 <div>
 		<div style="text-align:center"><h4>My Cart<br> We Serve The Taste you Love!.</h4></div>
 	</div>

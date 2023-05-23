@@ -93,9 +93,9 @@ int totalamnt=rs1.getInt(2);
 </body>
 <br>
 <br>
-<br>
-<br>
-<br>
+<div>
+	<a href=thank.jsp?customerId=<%=customerId %> class="navbar-brand">Pay</a>
+</div>
 <br>
 <br>
 <br>

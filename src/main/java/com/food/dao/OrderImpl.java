@@ -26,10 +26,10 @@ public class OrderImpl implements OrderDao
 				try (	
 					PreparedStatement ps = con.prepareStatement(insert);)
 				  {
-				    boolean id=valid.numberValidation(order.getCustomerId());
+				    /*boolean id=valid.numberValidation(order.getCustomerId());
 					boolean price=valid.numberValidation(order.getPrice());
 					boolean quantit=valid.numberValidation(order.getQuantity());
-					if(id==true&&price==true&&quantit==true)
+					if(id==true&&price==true&&quantit==true)*/
 					{
 					ps.setInt(1, order.getCustomerId());
 					ps.setString(2, order.getFoodName());
@@ -58,9 +58,7 @@ public class OrderImpl implements OrderDao
 							int executeUpdate3 = psq.executeUpdate();
 							System.out.println(executeUpdate3);
 						}
-					}else
-						System.out.println("Invalid");
-					
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

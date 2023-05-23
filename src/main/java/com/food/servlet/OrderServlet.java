@@ -45,16 +45,10 @@ public class OrderServlet extends HttpServlet {
 		order.setPrice(Integer.parseInt(request.getParameter("price")));
 		order.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 		or.insertOrder(order);
-		request.getRequestDispatcher("menuCard.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("menuCard.jsp").forward(request, response);	
 	}else if(submitType.equals("Cancel"))
 	{
-		request.getRequestDispatcher("order-form.jsp").forward(request, response);
-	}
-	else
-	{
-		request.getRequestDispatcher("order-form.jsp").forward(request, response);
+		response.sendRedirect("menuCard.jsp");
 	}
 	}
 	

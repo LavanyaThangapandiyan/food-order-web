@@ -11,8 +11,7 @@
 <link rel="stylesheet" href="css/tab.css">
 <head>
 <meta charset="ISO-8859-1">
-<title>menu card</title>
-<meta charset="ISO-8859-1">
+<title>Menu</title>
 <link rel="stylesheet" href="CSS/tab/css" type="CSS/tab/css">
 <link rel="stylesheet" href="css1.css" type="CSS/tab/css">
 <link rel="stylesheet" href="w3.css" type="tab/css">
@@ -26,34 +25,22 @@
 			<ul class="navbar-nav"> 
 				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
 				<li><a href="index.jsp" class="nav-link">Food Shop</a></li>
-				<li><a href="veg.jsp" class="nav-link">Vegetarian</a></li>
-				<li><a href="nonveg.jsp" class="nav-link">Non Vegetarian</a></li>
 			</ul>
 		</nav> 
-		
 	</header>
-	<%
+	<br>
+	<br>	
+<%
 	String userName=(String)session.getValue("userName");
 	String customerId=(String)session.getValue("customerId");
 	session.putValue("customerId", customerId);
 	session.putValue("userName", userName);
 	%>
-	<h3 align="center">Welcome  :<%=userName %></h3>
+	<br>
+	<h3>Healthy Food Wealthy Mood ...<%=userName %></h3>
 	<div>
-		<div style="text-align:center"><h4>Menu Card<br> We Serve The Taste you Love!.</h4></div>
+		<div style="text-align:center"><h4>Welcome VEGAN<br>Your Food is Grown Not Born.!!!</h4></div>
 	</div>
-	<br>
-	<br>
-	<div align="center">
-	<div align="center" class="card" style="width: 18rem; align="center"">
-    <ul class="list-group list-group-flush">
-    <li align="center" class="list-group-item" ><a href="break-fast.jsp">BreakFast</a></li>
-    <li align="center" class="list-group-item" ><a href="category-list.jsp">Lunch</a></li>
-    <li align="center" class="list-group-item" ><a href="dinner.jsp">Dinner</a></li>
-    <li align="center" class="list-group-item" ><a href="snacks.jsp">Dessert</a></li>
-  </ul>
-  </div>
-</div>	
 <br>
 <br>
 <center>
@@ -69,9 +56,10 @@
 			</thead>
 <tbody>
 <%
+String categoryName="Vegetarian";
 Connection con=ConnectionUtil.init();
 Statement st=con.createStatement();
-ResultSet rs=st.executeQuery("select id,name,price,Category,food_type from food_item");
+ResultSet rs=st.executeQuery("select id,name,price,Category,food_type from food_item where food_type='"+categoryName+"'");
 while(rs.next()){
      int id=rs.getInt(1);
 	 String name=rs.getString(2);
@@ -98,4 +86,11 @@ while(rs.next()){
 
 </table>
 	</center>	
-	</body></html>
+	<br>
+	
+	<div align="center">
+				<a href="menuCard.jsp" class="">Back to Menu</a>
+			</div>
+	
+</body>
+</html>
