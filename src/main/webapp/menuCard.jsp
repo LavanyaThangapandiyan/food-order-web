@@ -24,19 +24,19 @@
 <header>
 		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<ul class="navbar-nav"> 
-				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
-				<li><a href="index.jsp" class="nav-link">Food Shop</a></li>
+				<li><a href="history.jsp" class="nav-link">History</a></li>
 				<li><a href="veg.jsp" class="nav-link">Vegetarian</a></li>
 				<li><a href="nonveg.jsp" class="nav-link">Non Vegetarian</a></li>
+				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
 			</ul>
-		</nav> 
-		
+		</nav> 		
 	</header>
-	<%
+	<% 
 	String userName=(String)session.getValue("userName");
 	String customerId=(String)session.getValue("customerId");
 	session.putValue("customerId", customerId);
 	session.putValue("userName", userName);
+	
 	%>
 	<h3 align="center">Welcome  :<%=userName %></h3>
 	<div>
@@ -56,6 +56,7 @@
 </div>	
 <br>
 <br>
+
 <center>
 <table class="table table-bordered" style="background-color: #fsfsfs">
 <thead style="background-color: tomato">
@@ -64,10 +65,10 @@
 					<th align="center">Price</th>
 					<th align="center">Category</th>
 					<th align="center">Food_Type</th>
-					<th>Actions</th>
+					<th align="center">Actions</th>
+					
 				</tr>
-			</thead>
-<tbody>
+			</thead><tbody>
 <%
 Connection con=ConnectionUtil.init();
 Statement st=con.createStatement();
@@ -84,18 +85,13 @@ while(rs.next()){
 <td><%=price %></td>
 <td><%=category %></td>
 <td><%=type %></td>
-<td><action>
-<a href="order-form.jsp?customerId=<%=customerId %>&foodName=<%=name %>&price=<%=price %>"> Add to Cart</a>
-</action>
-</td>
+<td><a href="order-form.jsp?CustomerId=<%=customerId %>&foodName=<%=name %>&price=<%=price %>">Add to Cart</a></td>
 </tr>
 <%
 }
 %>
+
 </center>
-
 </tbody>
-
 </table>
-	</center>	
-	</body></html>
+</body></html>

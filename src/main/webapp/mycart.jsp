@@ -16,14 +16,16 @@
 </head>
 <body>
 <header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color:  tomato">
-            <ul class="navbar-nav">
-            </ul></nav>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<div>
-				<a href="menuCard.jsp" class="navbar-brand">Back to Menu</a>
-			</div>
-			</header> <br> 
+				<a href="" class="navbar-brand">Food Shop</a>
+				</div>
+			<ul class="navbar-nav"> 
+				<li><a href="menuCard.jsp" class="nav-link">Back to Menu</a></li>
+				<li><a href="index.jsp" class="nav-link">Log out</a></li>
+			</ul>
+		</nav>	
+	</header>
 <%
 String userName=(String)session.getValue("userName");
 String csid = (String)session.getValue("customerId");
@@ -31,8 +33,9 @@ int customerId=Integer.parseInt(csid);
 %>
 <br>
 	<h3>Welcome  :<%=userName %></h3>
-	<div>
-<div>
+	<div></div>
+	
+<div>       
 		<div style="text-align:center"><h4>My Cart<br> We Serve The Taste you Love!.</h4></div>
 	</div>
 <center>
@@ -63,17 +66,23 @@ while(rs.next())
 %>
 <tr>
 <td><%=name %></td>
-<td><%=price %></td>
+<td>Rs <%=price %></td>
 <td><%=quantity %></td>
 <td><%=amount %></td>
 <td><button><a href="CartServlet?id=<%=id %>">Remove</a></button></td>
-</tr>
+</tr><br>
 <%
 }
 %>
 </tbody></table></center>
+<td><input type="submit" name="submit" value="Confirm"></td>
 <div align="center">
-	<a href="payment.jsp" class="navbar-brand">Place Order</a>
-			</div>
+	<a href="payment.jsp"class="navbar-brand">Place Order</a>
+</div>
+
+<br>
+<br>
 </body>
+<br>
+
 </html>

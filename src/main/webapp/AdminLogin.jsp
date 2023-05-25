@@ -5,7 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Administrator Login Page</title>
-
 <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css" />

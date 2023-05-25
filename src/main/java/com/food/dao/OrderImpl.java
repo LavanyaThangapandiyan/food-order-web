@@ -26,10 +26,10 @@ public class OrderImpl implements OrderDao
 				try (	
 					PreparedStatement ps = con.prepareStatement(insert);)
 				  {
-				    /*boolean id=valid.numberValidation(order.getCustomerId());
+				    boolean id=valid.numberValidation(order.getCustomerId());
 					boolean price=valid.numberValidation(order.getPrice());
 					boolean quantit=valid.numberValidation(order.getQuantity());
-					if(id==true&&price==true&&quantit==true)*/
+					if(id==true&&price==true&&quantit==true)
 					{
 					ps.setInt(1, order.getCustomerId());
 					ps.setString(2, order.getFoodName());
@@ -78,6 +78,22 @@ public class OrderImpl implements OrderDao
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+	}
+	@Override
+	public void deleteAll(int customerId) throws SQLException {
+		// TODO Auto-generated method stub
+		try{Connection con=ConnectionUtil.init();
+		String delete="delete from  order_item where customer_id=?";
+		PreparedStatement ps=con.prepareStatement(delete);
+		ps.setInt(1, customerId);
+		int executeUpdate = ps.executeUpdate();
+		System.out.println(executeUpdate);
+		}catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 		
 	}
 	

@@ -30,9 +30,9 @@
 			<label>Food Name:</label><input value="<%=foodName %>" class="form-control" name="name" required="required">
 			</fieldset>
 			<fieldset class="form-group">
-			<label>Food Price:</label><input value="<%=price %>" class="form-control" name="price" required="required">
+			<label>Food Price:</label><input placeholder="Rs"  value="<%=price %>" class="form-control" name="price" required="required">
 			</fieldset>
-			<fieldset class="form-group">
+			             <fieldset class="form-group">
 								<lable> <i class="fas fa-unlock-alt"></i>&nbsp&nbspQuantity:</lable>
 								<input type="number" min="1"class="form-control" name="quantity"
 									placeholder="Enter Quantity" value="" required="required">

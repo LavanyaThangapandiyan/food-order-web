@@ -23,8 +23,9 @@
 <header>
 		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<ul class="navbar-nav"> 
-				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
 				<li><a href="index.jsp" class="nav-link">Food Shop</a></li>
+				<li><a href="menuCard.jsp" class="nav-link">Back to Menu</a></li>
+				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
 			</ul>
 		</nav> 
 	</header>
@@ -70,7 +71,7 @@ while(rs.next()){
 %>
 <tr>
 <td><%=name %></td>
-<td><%=price %></td>
+<td>Rs <%=price %></td>
 <td><%=category %></td>
 <td><%=type %></td>
 <td><action>
@@ -88,10 +89,5 @@ while(rs.next()){
 </table>
 	</center>	
 	<br>
-	
-	<div align="center">
-				<a href="menuCard.jsp" class="">Back to Menu</a>
-			</div>
-	
 </body>
 </html>

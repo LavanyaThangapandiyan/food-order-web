@@ -51,29 +51,7 @@ public boolean updateCustomer(User user) throws SQLException
 	
 }
 
-/*@Override
-public List<User> selectAllCustomer() {
-	// TODO Auto-generated method stub
-	List<User> user=new ArrayList<>();
-	try(Connection con=ConnectionUtil.init();
-			PreparedStatement ps=con.prepareStatement(show);){
-		System.out.println(ps);
-		ResultSet rs=ps.executeQuery();
-		while(rs.next())
-		{
-			int id=rs.getInt("id");
-			String fname=rs.getString("fname");
-			String lname=rs.getString("lname");
-			String email=rs.getString("email");
-			String uname=rs.getString("uname");
-			user.add(new User(id, fname, lname, email, uname));
-		}
-	}catch(SQLException e)
-	{
-		printSQLException(e);
-	}
-	return user;
-}*/
+
 //Select Customer By Id
 @Override
 public User selectCustomer(int id) {
@@ -101,23 +79,6 @@ public User selectCustomer(int id) {
 	
 	return user;
 }
-	
-private void printSQLException(SQLException ex)
-{
-	for (Throwable e : ex) {
-		if (e instanceof SQLException) {
-			e.printStackTrace(System.err);
-			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-			System.err.println("Message: " + e.getMessage());
-			Throwable t = ex.getCause();
-			while (t != null) {
-				System.out.println("Cause: " + t);
-				t = t.getCause();
-			}
-		}
-	}
-}
 @Override
 public int findCustomerId(String name) throws SQLException {
 	// TODO Auto-generated method stub
@@ -137,5 +98,21 @@ public int findCustomerId(String name) throws SQLException {
 	}else
 			System.out.println("Invalid");
 	return 0;	
+}
+private void printSQLException(SQLException ex)
+{
+	for (Throwable e : ex) {
+		if (e instanceof SQLException) {
+			e.printStackTrace(System.err);
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println("Message: " + e.getMessage());
+			Throwable t = ex.getCause();
+			while (t != null) {
+				System.out.println("Cause: " + t);
+				t = t.getCause();
+			}
+		}
+	}
 }
 }

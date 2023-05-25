@@ -16,17 +16,21 @@
 	 </head>
 <body>
 <header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color:  tomato">
-            <ul class="navbar-nav">
-            </ul></nav>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<div>
-				<a href="index.jsp" class="navbar-brand">Log Out</a>
-			</div>
+				<a href="" class="navbar-brand">Food Shop</a>
+				</div>
+			<ul class="navbar-nav"> 
+				<li><a href="menuCard.jsp" class="nav-link">Back to Menu</a></li>
+				<li><a href="index.jsp" class="nav-link">Log out</a></li>
+			</ul>
+		</nav> 
+	</header>
 <%
 String customer=request.getParameter("customerId");
 int cusId=Integer.parseInt(customer);
 String userName=(String)session.getValue("userName");
+String foodName=(String)session.getValue("name");
 %>
 			</header> 
 			<br>
@@ -41,8 +45,7 @@ String userName=(String)session.getValue("userName");
 			<br>
 			<br>
 			<br>
-			<br>
-			
+			<br>		
 			
 <%
 Connection con=ConnectionUtil.init();
@@ -52,4 +55,15 @@ ps.setInt(1, cusId);
 ps.executeUpdate();
 %>			
 </body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer>
+	<div class="jumbotron text-center" style="margin-bottom:0">
+	<p class="">Made with Love by lav@lavanaya@fs26.</p>
+	</div>
+</footer>
 </html>

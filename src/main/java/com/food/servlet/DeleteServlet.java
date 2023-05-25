@@ -1,28 +1,25 @@
 package com.food.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.food.dao.OrderImpl;
+import com.food.dao.HistoryImpl;
 
 /**
- * Servlet implementation class CartServlet
+ * Servlet implementation class DeleteServlet
  */
-@WebServlet("/CartServlet")
-public class CartServlet extends HttpServlet {
+@WebServlet("/DeleteServlet")
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartServlet() {
+    public DeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +30,11 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		OrderImpl order=new OrderImpl();
+		HistoryImpl history=new HistoryImpl();
 		String id=request.getParameter("id");
 		int orderId=Integer.parseInt(id);
-			try {
-				order.deleteOrder(orderId);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    request.getRequestDispatcher("mycart.jsp").forward(request, response);
-	    
+		history.deleteHistory(orderId);
+		request.getRequestDispatcher("history.jsp").forward(request, response);
 	}
 
 	/**
@@ -51,7 +42,7 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 		
 	}
 

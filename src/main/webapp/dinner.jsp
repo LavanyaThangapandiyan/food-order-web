@@ -25,12 +25,10 @@
 			<ul class="navbar-nav"> 
 				<li><a href="mycart.jsp" class="nav-link">My Cart</a></li>
 				<li><a href="index.jsp" class="nav-link">Food Shop</a></li>
+				<li><a href="menuCard.jsp" class="nav-link">Back to Menu</a></li>
 			</ul>
 		</nav> 
 	</header>
-	<br>
-	<br>
-	
 <%
 	String userName=(String)session.getValue("userName");
 	String customerId=(String)session.getValue("customerId");
@@ -40,7 +38,7 @@
 	<br>
 	<h3>Welcome  :<%=userName %></h3>
 	<div>
-		<div style="text-align:center"><h4>Menu Card<br> We Serve The Taste you Love!.</h4></div>
+		<div style="text-align:center"><h4>Dinner<br> We Serve The Taste you Love!.<br>Non Vegetarian Dishes!.</h4></div>
 	</div>
 <br>
 <br>
@@ -58,9 +56,10 @@
 <tbody>
 <%
 String categoryName="Dinner";
+String foodType="Non Vegetarian";
 Connection con=ConnectionUtil.init();
 Statement st=con.createStatement();
-ResultSet rs=st.executeQuery("select id,name,price,Category,food_type from food_item where Category='"+categoryName+"'");
+ResultSet rs=st.executeQuery("select id,name,price,Category,food_type from food_item where Category='"+categoryName+"' and food_type='"+foodType+"'");
 while(rs.next()){
      int id=rs.getInt(1);
 	 String name=rs.getString(2);
@@ -70,7 +69,7 @@ while(rs.next()){
 %>
 <tr>
 <td><%=name %></td>
-<td><%=price %></td>
+<td>Rs <%=price %></td>
 <td><%=category %></td>
 <td><%=type %></td>
 <td><action>
@@ -81,16 +80,61 @@ while(rs.next()){
 <%
 }
 %>
-</center>
-
 </tbody>
 
 </table>
-	</center>	
-	
-	<div align="center">
-				<a href="menuCard.jsp" class="">Back to Menu</a>
-			</div>
+	</center>
+	<br>
+	<br>
+	<div>
+		<div style="text-align:center"><h4>Vegetarian Dishes!.</h4></div>
+	</div>
+<br>
+<br>
+<center>
+<table class="table table-bordered" style="background-color: #fsfsfs">
+<thead style="background-color: tomato">
+				<tr>
+					<th align="center">Food Name</th>
+					<th align="center">Price</th>
+					<th align="center">Category</th>
+					<th align="center">Food_Type</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+<tbody>
+<%
+String category="Dinner";
+String type="Vegetarian";
+Connection conn=ConnectionUtil.init();
+Statement stt=conn.createStatement();
+ResultSet rss=stt.executeQuery("select id,name,price,Category,food_type from food_item where Category='"+category+"' and food_type='"+type+"'");
+while(rss.next()){
+     int id=rss.getInt(1);
+	 String name=rss.getString(2);
+	 int price=rss.getInt(3);
+	 String categorys=rss.getString(4);
+	 String types=rss.getString(5);
+%>
+<tr>
+<td><%=name %></td>
+<td>Rs <%=price %></td>
+<td><%=categorys %></td>
+<td><%=types %></td>
+<td><action>
+<a href="order-form.jsp?customerId=<%=customerId %>&foodName=<%=name %>&price=<%=price %>"> Add to Cart</a>
+</action>
+</td>
+</tr>
+<%
+}
+%>
+</tbody>
+
+</table>
+	</center>
+	<br>	
+
 	
 </body>
 </html>

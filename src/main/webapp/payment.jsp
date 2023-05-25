@@ -16,19 +16,21 @@
 	 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color:  tomato">
-            <ul class="navbar-nav">
-            </ul></nav>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<div>
-				<a href="index.jsp" class="navbar-brand">Log Out</a>
-			</div>
-			</header> <br> 	
-			<%
+				<a href="" class="navbar-brand">Food Shop</a>
+				</div>
+			<ul class="navbar-nav"> 
+				<li><a href="menuCard.jsp" class="nav-link">Back to Menu</a></li>
+				<li><a href="index.jsp" class="nav-link">Log out</a></li>
+			</ul>
+		</nav> 
+	</header>
+<%
 String csid = (String)session.getValue("customerId");
 int customerId=Integer.parseInt(csid);
 %>
-<div>
+<div><br><br>
 		<div style="text-align:center"><h4>Payment Details<br> We Serve The Taste you Love!.</h4></div>
 	</div>
 	<center>
@@ -43,9 +45,9 @@ int customerId=Integer.parseInt(csid);
 			</thead>
 			<tbody>
 	<%
-	Connection con=ConnectionUtil.init();
+	Connection conn=ConnectionUtil.init();
 	String find="select food_name,price,quantity,amount from order_item where customer_id=?";
-	PreparedStatement ps=con.prepareStatement(find);
+	PreparedStatement ps=conn.prepareStatement(find);
 	ps.setInt(1, customerId);
 	ResultSet rs=ps.executeQuery();
 	while(rs.next())
@@ -83,7 +85,7 @@ int totalAmountc =rs1.getInt(1);
 int totalamnt=rs1.getInt(2);
 %>
 <tr>
-<td><h4>Your Total Amount is:</h4></td>
+<td><h4>Your Total Amount is :  </h4></td>
 <td><%=totalamnt%></td>
 </tr>
 <%
@@ -99,7 +101,7 @@ int totalamnt=rs1.getInt(2);
 <br>
 <br>
 <br>
-
+<br>
 <footer>
 	<div class="jumbotron text-center" style="margin-bottom:0">
 	<p class="">Made with Love by lav@lavanaya@fs26.</p>

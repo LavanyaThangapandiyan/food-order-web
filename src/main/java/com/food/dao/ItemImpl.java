@@ -50,11 +50,8 @@ public void insertItem(FoodItem item) throws SQLException
 					System.out.println(executeUpdate);	
 				}else
 					System.out.println("Data Not Inserted");
-			}
-				
+			}			
 	}
-		
-
 //update food item
 public boolean updateItem(FoodItem item) throws SQLException
 {
@@ -70,7 +67,6 @@ public boolean updateItem(FoodItem item) throws SQLException
 		ps.setInt(6, item.getId());
 		rowUpdated=ps.executeUpdate()>0;
 	}	
-	
 	return rowUpdated;
 }
 //Select Item By id
@@ -135,7 +131,6 @@ public boolean deleteItem(int id) throws SQLException
 	return rowDeleted;
 	
 }
-
 
 private void printSQLException(SQLException ex)
 {
