@@ -12,7 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.food.dao.CustomerImpl;
 import com.food.dao.RegistrationImpl;
+import com.food.exception.EmailException;
+import com.food.exception.PasswordException;
 import com.food.model.User;
+import com.food.validation.Validation;
 
 /**
  * Servlet implementation class UserRegister
@@ -20,6 +23,7 @@ import com.food.model.User;
 @WebServlet("/UserRegister")
 public class UserRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Validation valid=new Validation();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,17 +39,19 @@ public class UserRegister extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		User user=new User();
+		
 		doGet(request, response);
 		CustomerImpl customer=new CustomerImpl();
 		RegistrationImpl reg=new RegistrationImpl();
 		String userName=request.getParameter("userName");
 		String password=request.getParameter("password");
 		String submitType=request.getParameter("submit");
-		User user=new User();
 		user=reg.getUserDetails(userName, password);
-		try{if(submitType.equals("Login")&&user.getFirstName()!=null&&user.getLastName()!=null&&user.getEmail()!=null&&user.getUserName()!=null&&user.getPassword()!=null)
+	try{if(submitType.equals("Login")&&user.getFirstName()!=null&&user.getLastName()!=null&&user.getEmail()!=null&&user.getUserName()!=null&&user.getPassword()!=null)
 		{
-			
+		
 			int customerId=customer.findCustomerId(userName);
 			String id=String.valueOf(customerId);
 			HttpSession session=request.getSession(true);
@@ -54,25 +60,47 @@ public class UserRegister extends HttpServlet {
 			response.sendRedirect("menuCard.jsp");
 			request.setAttribute("message",user.getFirstName());
 			request.setAttribute("message", user.getLastName());
+			
 			request.setAttribute("message",user.getEmail());
 			//request.getRequestDispatcher("menuCard.jsp").forward(request, response);	
 		}
 	   else if(submitType.equals("Register"))
 	    { 
+		   boolean email=valid.emailValidation(request.getParameter("email"));
+		boolean password1=valid.passwordValidation(request.getParameter("password"));
 		 user.setFirstName(request.getParameter("firstname"));
 		 user.setLastName(request.getParameter("lastname"));
+		 try {if(email==true)
+		 {
 		 user.setEmail(request.getParameter("email"));
+		 }else
+			 throw new EmailException("Invalid Email ID", "email");
+		 }catch(EmailException em)
+		 {
+			out.println("Invalid Email"); 
+			//response.sendRedirect("register.jsp");
+		 }
 		 user.setUserName(request.getParameter("userName"));
+		 try {
+			 if(password1==true)
+			 {
 		 user.setPassword(request.getParameter("password"));
+			 }else
+				 throw new PasswordException("Invalid Password", "password");
+		 }catch(PasswordException ex)
+		 {
+			out.println("Invalid Password"); 
+			response.sendRedirect("register.jsp");
+		 } 
 		 reg.insertUserDetails(user);
 		 request.getRequestDispatcher("index.jsp").forward(request, response);
 		 // request.setAttribute("SuccessMessage", "Registration done,Please login to Continue..");
-	}
-	else {
+	     }
+	 else {
 		request.setAttribute("message","Data Not Found,Click On Register");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
-	}
+	    }
 	}catch(Exception e)
 		{
 		e.printStackTrace();
