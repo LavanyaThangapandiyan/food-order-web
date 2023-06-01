@@ -23,7 +23,7 @@ public class AdminValidation extends HttpServlet {
 		response.setContentType("text/html");
 		String name=request.getParameter("userName");
 		String password=request.getParameter("password");
-		if(name.equals("Lavanya")&&password.equals("lavanya26"))
+		if(name.equals("Lavanya")&&password.equals("Lavanya@26"))
 		{
 			RequestDispatcher rd=request.getRequestDispatcher("item-list.jsp");
 			rd.forward(request, response);

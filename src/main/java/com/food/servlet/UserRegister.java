@@ -66,35 +66,17 @@ public class UserRegister extends HttpServlet {
 		}
 	   else if(submitType.equals("Register"))
 	    { 
-		   boolean email=valid.emailValidation(request.getParameter("email"));
-		boolean password1=valid.passwordValidation(request.getParameter("password"));
+		//boolean email=valid.emailValidation(request.getParameter("email"));
+		//boolean password1=valid.passwordValidation(request.getParameter("password"));
 		 user.setFirstName(request.getParameter("firstname"));
 		 user.setLastName(request.getParameter("lastname"));
-		 try {if(email==true)
-		 {
 		 user.setEmail(request.getParameter("email"));
-		 }else
-			 throw new EmailException("Invalid Email ID", "email");
-		 }catch(EmailException em)
-		 {
-			out.println("Invalid Email"); 
-			//response.sendRedirect("register.jsp");
-		 }
 		 user.setUserName(request.getParameter("userName"));
-		 try {
-			 if(password1==true)
-			 {
 		 user.setPassword(request.getParameter("password"));
-			 }else
-				 throw new PasswordException("Invalid Password", "password");
-		 }catch(PasswordException ex)
-		 {
-			out.println("Invalid Password"); 
-			response.sendRedirect("register.jsp");
-		 } 
 		 reg.insertUserDetails(user);
-		 request.getRequestDispatcher("index.jsp").forward(request, response);
-		 // request.setAttribute("SuccessMessage", "Registration done,Please login to Continue..");
+		 request.getRequestDispatcher("register.jsp").forward(request, response);
+		 
+		 //request.setAttribute("SuccessMessage", "Registration done,Please login to Continue..");
 	     }
 	 else {
 		request.setAttribute("message","Data Not Found,Click On Register");

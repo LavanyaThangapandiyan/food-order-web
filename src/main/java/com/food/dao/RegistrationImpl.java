@@ -15,14 +15,13 @@ public class RegistrationImpl  implements RegistrationDao{
 	@Override
 	public void insertUserDetails(User user) throws SQLException {
 		// TODO Auto-generated method stub 	
-		Connection con=ConnectionUtil.init();			
-		boolean fname=valid.nameValidation(user.getFirstName());
-		boolean lname=valid.nameValidation(user.getLastName());
-		boolean uname=valid.nameValidation(user.getUserName());
+		Connection con=ConnectionUtil.init();	
+		boolean first=valid.nameValidation(user.getFirstName());
+		boolean last=valid.nameValidation(user.getLastName());
 		boolean email=valid.emailValidation(user.getEmail());
-		boolean pwd=valid.passwordValidation(user.getPassword());
-		if(fname==true&&lname==true&&uname==true)
-		{	
+		boolean uname=valid.nameValidation(user.getUserName());
+		if(first==true&&last==true&&email==true&&uname==true)
+		{
 				String insert="insert into members(first_name,last_name,email,user_name,password)values(?,?,?,?,Md5(?))";
 				PreparedStatement ps;
 				ps = con.prepareStatement(insert);
@@ -34,8 +33,8 @@ public class RegistrationImpl  implements RegistrationDao{
 				int executeUpdate = ps.executeUpdate();
 				System.out.println(executeUpdate);	
 		}else
-				System.out.println("Invalid ");			         
-	   }
+			System.out.println("Invalid");
+	}
 
 	@Override
 	public User getUserDetails(String userName, String password) {

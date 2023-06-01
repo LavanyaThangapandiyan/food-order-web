@@ -13,6 +13,19 @@
 	 <link rel="stylesheet" href="css/tab.css">
 </head>
 <body>
+<script>
+function validate()
+{
+var name=document.getElementById("name").value;
+var regexName=/^[a-zA-Z ]+$/;
+var password=document.getElementById("password").value;
+var regexPassword=/^[a-zA-Z0-9]{8,}$/;  //should contain at least 8 from the mentioned characters
+if(regexName.test(name)&&regexPassword.equals(password))
+alert("Login Successfully!...")
+else
+ document.getElementById("user").style.visibility="visible";
+}
+</script>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: tomato">
@@ -39,21 +52,26 @@
 							<fieldset class="form-group">
 								<lable>
 								<i class="fa fa-user"></i>&nbsp&nbspUser Name:</lable>
-								<input type="text" class="form-control" name="userName"
+								<input id="name" type="text" class="form-control" name="userName"
 									placeholder="Enter your User Name" value="" required="required">
 							</fieldset>
 							<fieldset class="form-group">
 								<lable>
 								<i class="fas fa-unlock-alt"></i>&nbsp&nbspPassword:</lable>
-								<input type="password" class="form-control" name="password"
+								<input id="password" type="password" class="form-control" name="password"
 									placeholder="Enter your password" value="" required="required">
 							</fieldset>
 							<table>
 							<tr>
-					<td><input type="submit" name="submit" value="Login"></td>
+					<td><input onclick="validate();" type="submit" name="submit" value="Login"></td>
 					<td><a href="register.jsp">Registration</a></td>
-				</tr>
+				        </tr>
 							</table>
+							<div>
+		<label id="user" style="color:red;visibility:hidden">Invalid Login Details
+        </label>
+		</div>
+							
 						</form>
 					</div>
 				</div>

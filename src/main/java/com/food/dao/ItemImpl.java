@@ -28,8 +28,18 @@ public void insertItem(FoodItem item) throws SQLException
 {
 	
 	System.out.println(insert);
-	       Connection con=ConnectionUtil.init();
-	        String find="select name from food_item where Category=?";
+	Connection con=ConnectionUtil.init();
+	PreparedStatement ps=con.prepareStatement(insert);
+	ps.setString(1, item.getName());
+	ps.setString(2, item.getPrice());
+	ps.setString(3, item.getCategory());
+	ps.setString(4, item.getFood_type());
+	ps.setInt(5, item.getQuantity());
+	System.out.println(ps);
+	int executeUpdate = ps.executeUpdate();
+	System.out.println(executeUpdate);	
+	       
+	      /* String find="select name from food_item where Category=?";
 			PreparedStatement psf=con.prepareStatement(find);
 			psf.setString(1,item.getCategory());
 			ResultSet rs=psf.executeQuery();
@@ -38,19 +48,8 @@ public void insertItem(FoodItem item) throws SQLException
 				String foodName=rs.getString(1);
 				String name = item.getName();
 				if(foodName != name)
-				{
-					PreparedStatement ps=con.prepareStatement(insert);
-					ps.setString(1, item.getName());
-					ps.setString(2, item.getPrice());
-					ps.setString(3, item.getCategory());
-					ps.setString(4, item.getFood_type());
-					ps.setInt(5, item.getQuantity());
-					System.out.println(ps);
-					int executeUpdate = ps.executeUpdate();
-					System.out.println(executeUpdate);	
-				}else
-					System.out.println("Data Not Inserted");
-			}			
+				{*/
+					
 	}
 //update food item
 public boolean updateItem(FoodItem item) throws SQLException

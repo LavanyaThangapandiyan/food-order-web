@@ -18,6 +18,19 @@
 	 <link rel="stylesheet" href="css/tab.css">
 </head>
 <body>
+<script>
+function validate()
+{
+var name=document.getElementById("name").value;
+var regexName=/^[a-zA-Z ]+$/;
+var password=document.getElementById("password").value;
+var regexPassword="Lavanya@26";  //should contain at least 8 from the mentioned characters
+if(regexName.test(name)&&regexPassword.equals(password))
+	document.getElementById("login").style.visibility="visible";
+else
+ document.getElementById("user").style.visibility="visible";
+}
+</script>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark" style="background-color:tomato">
 			<div>
@@ -39,20 +52,23 @@
 			<form action="AdminValidation" method="get">
 				<fieldset class="form-group">
 					<label><i class="fa fa-user"></i>&nbsp&nbspUser Name:</label> <input
-						type="text" class="form-control" name="userName"
+						id="name" type="text" class="form-control" name="userName"
 						placeholder="Enter your User Name" value="" required="required">
 				</fieldset>
 				
 				<fieldset class="form-group">
-					<label><i class="fa fa-unlock-alt"></i>&nbsp&nbspPassword:</label>
-					<input type="password" class="form-control" name="password"
+					<label ><i class="fa fa-unlock-alt"></i>&nbsp&nbspPassword:</label>
+					<input type="password" id="password" class="form-control" name="password"
 						placeholder="Enter your Password" value="" required="required">
 				</fieldset>
-				<button type="submit" class="btn btn-success">Sign In</button>
-
+				<button onclick="validate();"  type="submit" class="btn btn-success">Sign In</button>
 			</form>
-			</div>
+		<div>
+		<label id="user" style="color:red;visibility:hidden">
+        Invalid Login Details
+        </label>
 		</div>
+		
 	</div>
 </body>
 <footer>
